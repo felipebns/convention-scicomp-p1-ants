@@ -21,15 +21,6 @@ class Simulation:
 
         self.grid = Grid(ants=self.ants, deposit_rate=self.deposit_rate, decay_rate=self.decay_rate)
 
-    def run(self) -> None:
-        self.simulate_ant_movement()
-
-        mean_length = self.calculate_mean_length()
-
-        self.print_results(mean_length)
-
-        self.grid.plot_movement()
-
     def print_results(self, mean_length: float) -> None:
         print(f"F/L ratio: {np.mean([v[0] for v in self.grid.ant_ratio_counter.values()])}")
         print(f"Following ants: {np.mean([v[1] for v in self.grid.ant_ratio_counter.values()])}")
@@ -65,3 +56,12 @@ class Simulation:
             if release_control > 0:
                 release_control -= 1
             step += 1
+
+    def run(self) -> None:
+        self.simulate_ant_movement()
+
+        mean_length = self.calculate_mean_length()
+
+        self.print_results(mean_length)
+
+        self.grid.plot_movement()

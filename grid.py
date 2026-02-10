@@ -4,10 +4,11 @@ import math
 ROUND_PRECISION = 3
 
 class Grid:
-    def __init__(self, ants: list, deposit_rate: int, decay_rate: int) -> None:
+    def __init__(self, ants: list, deposit_rate: int, decay_rate: int, max_concentration: int = 250) -> None:
         self.ants = ants
         self.deposit_rate = deposit_rate
         self.decay_rate = decay_rate
+        self.max_concentration = max_concentration
         self.x_min = 0
         self.x_max = 256
         self.y_min = 0
@@ -33,6 +34,9 @@ class Grid:
             self.pheromone_trails[(ant.x, ant.y)] = self.deposit_rate 
         else:
             self.pheromone_trails[(ant.x, ant.y)] += self.deposit_rate
+            # Avoid infinite acumulation, super highway
+            if self.pheromone_trails[(ant.x, ant.y)] > self.max_concentration:
+                self.pheromone_trails[(ant.x, ant.y)] = self.max_concentration
 
     def update_ant_status_counter(self, ant: object) -> None:
         if ant.state != "out_of_bounds":
@@ -112,7 +116,10 @@ class Grid:
         
         x_coords = [pos[0] for pos in self.pheromone_trails.keys()]
         y_coords = [pos[1] for pos in self.pheromone_trails.keys()]
-        plt.scatter(x_coords, y_coords, c='black', s=20, alpha=0.6)
+        concentrations = [conc for conc in self.pheromone_trails.values()]
+        
+        plt.scatter(x_coords, y_coords, c=concentrations, s=3, alpha=0.6, cmap='magma')
+        plt.colorbar(label='Pheromone Concentration')
         
         plt.xlim(self.x_min, self.x_max)
         plt.ylim(self.y_min, self.y_max)
