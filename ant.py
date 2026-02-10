@@ -27,7 +27,7 @@ class Ant:
         self.walk_control()
         self.set_new_angle(n_multiplier, n_value)
 
-    def set_new_angle(self, n_multiplier: int, n_value: int) -> None:
+    def set_new_angle(self, n_multiplier: int, n_value: int) -> None: #n_multiplier is -1 or 1. n_value is the value of the turning kernel, from 0 to 4
         self.angle = ((n_multiplier * n_value * 45) + self.angle) % 360
     
     def walk_control(self) -> None:
@@ -88,19 +88,20 @@ class Ant:
 
     def follow(self) -> None:
         self.follow_counter += 1
-        n_multiplier = 0 # if self.found_front is true, n_multiplier stays 0, and the ant keeps moving forward
+        n_value = 1
+        n_multiplier = 0 # if self.found_front is true, n_value stays 0, and the ant keeps moving forward
         if self.found_left:
             n_multiplier = -1
         elif self.found_right:
             n_multiplier = 1
 
-        self.set_new_angle(n_multiplier, n_value=1)
+        self.set_new_angle(n_multiplier=n_multiplier, n_value=n_value)
         self.walk_control()
 
     def fork(self) -> None: #need value of concentration here
         self.follow_counter += 1
-        n_value = 1
-        n_multiplier = 0 # first algorithm, prioritaze moving forward, even if it has less concentration!
+        n_value = 1 # first algorithm, prioritaze moving forward, even if it has less concentration!
+        n_multiplier = 0 # move forward, same angle 
         if not self.found_front: 
             if self.left_conc > self.pheromone_sat:
                 self.left_conc = self.pheromone_sat
