@@ -4,7 +4,7 @@ import math
 ROUND_PRECISION = 3
 
 class Grid:
-    def __init__(self, ants: list, deposit_rate: int, decay_rate: int, max_concentration: int = 250) -> None:
+    def __init__(self, ants: list, deposit_rate: int, decay_rate: int, max_concentration: int = 280) -> None:
         self.ants = ants
         self.deposit_rate = deposit_rate
         self.decay_rate = decay_rate
