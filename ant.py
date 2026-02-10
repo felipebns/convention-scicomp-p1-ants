@@ -1,7 +1,7 @@
 import random
 import math
 
-ROUND_PRECISION = 4
+ROUND_PRECISION = 3
 
 class Ant:    
     def __init__(self, fidelity: int, pheromone_sat: int) -> None:

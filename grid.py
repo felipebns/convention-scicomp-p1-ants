@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import math
 
-ROUND_PRECISION = 4
+ROUND_PRECISION = 3
 
 class Grid:
     def __init__(self, ants: list, deposit_rate: int, decay_rate: int) -> None:
