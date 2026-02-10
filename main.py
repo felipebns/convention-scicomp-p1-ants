@@ -4,7 +4,7 @@ if __name__ == "__main__":
     fidelity = 247
     pheromone_saturation = 24
     decay_rate = 1
-    deposit_rate = 12
+    deposit_rate = 8
     n_ants = 500
     max_steps = 1500
 
