@@ -1,6 +1,8 @@
 import random
 import math
 
+ROUND_PRECISION = 4
+
 class Ant:    
     def __init__(self, fidelity: int, pheromone_sat: int) -> None:
         self.speed = 1
@@ -51,6 +53,9 @@ class Ant:
         elif self.angle == 315:
             self.y += self.speed / math.sqrt(2)
             self.x -= self.speed / math.sqrt(2)
+
+        self.x = round(self.x, ROUND_PRECISION)
+        self.y = round(self.y, ROUND_PRECISION)
 
     def update_awareness(self, found_left: bool, found_front: bool, found_right: bool, left_conc: int, front_conc: int, right_conc: int) -> None:
         self.found_left = found_left

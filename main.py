@@ -2,8 +2,8 @@ from simulation import Simulation
 
 if __name__ == "__main__":
     fidelity = 247
-    pheromone_saturation = 24
-    decay_rate = 1
+    pheromone_saturation = 50
+    decay_rate = 0.5
     deposit_rate = 8
     n_ants = 500
     max_steps = 1500

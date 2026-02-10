@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 import math
 
+ROUND_PRECISION = 4
+
 class Grid:
     def __init__(self, ants: list, deposit_rate: int, decay_rate: int) -> None:
         self.ants = ants
@@ -58,38 +60,40 @@ class Grid:
         front_conc = 0
         right_conc = 0
 
+        d = ant.speed / math.sqrt(2)
+
         if ant.angle == 0:
-            pos_left = (ant.x - (ant.speed / math.sqrt(2)), ant.y + (ant.speed / math.sqrt(2)))
-            pos_front = (ant.x, ant.y + ant.speed)
-            pos_right = (ant.x + (ant.speed / math.sqrt(2)), ant.y + (ant.speed / math.sqrt(2)))
+            pos_left = (round(ant.x - d, ROUND_PRECISION), round(ant.y + d, ROUND_PRECISION))
+            pos_front = (ant.x, round(ant.y + ant.speed, ROUND_PRECISION))
+            pos_right = (round(ant.x + d, ROUND_PRECISION), round(ant.y + d, ROUND_PRECISION))
         elif ant.angle == 45:
-            pos_left = (ant.x, ant.y + ant.speed)
-            pos_front = (ant.x + (ant.speed / math.sqrt(2)), ant.y + (ant.speed / math.sqrt(2)))
-            pos_right = (ant.x + ant.speed, ant.y)
+            pos_left = (ant.x, round(ant.y + ant.speed, ROUND_PRECISION))
+            pos_front = (round(ant.x + d, ROUND_PRECISION), round(ant.y + d, ROUND_PRECISION))
+            pos_right = (round(ant.x + ant.speed, ROUND_PRECISION), ant.y)
         elif ant.angle == 90:
-            pos_left = (ant.x + (ant.speed / math.sqrt(2)), ant.y + (ant.speed / math.sqrt(2)))
-            pos_front = (ant.x + ant.speed, ant.y)
-            pos_right = (ant.x + (ant.speed / math.sqrt(2)), ant.y - (ant.speed / math.sqrt(2)))
+            pos_left = (round(ant.x + d, ROUND_PRECISION), round(ant.y + d, ROUND_PRECISION))
+            pos_front = (round(ant.x + ant.speed, ROUND_PRECISION), ant.y)
+            pos_right = (round(ant.x + d, ROUND_PRECISION), round(ant.y - d, ROUND_PRECISION))
         elif ant.angle == 135:
-            pos_left = (ant.x + ant.speed, ant.y)
-            pos_front = (ant.x + (ant.speed / math.sqrt(2)), ant.y - (ant.speed / math.sqrt(2)))
-            pos_right = (ant.x, ant.y - ant.speed)
+            pos_left = (round(ant.x + ant.speed, ROUND_PRECISION), ant.y)
+            pos_front = (round(ant.x + d, ROUND_PRECISION), round(ant.y - d, ROUND_PRECISION))
+            pos_right = (ant.x, round(ant.y - ant.speed, ROUND_PRECISION))
         elif ant.angle == 180:
-            pos_left = (ant.x + (ant.speed / math.sqrt(2)), ant.y - (ant.speed / math.sqrt(2)))
-            pos_front = (ant.x, ant.y - ant.speed)
-            pos_right = (ant.x - (ant.speed / math.sqrt(2)), ant.y - (ant.speed / math.sqrt(2)))  
+            pos_left = (round(ant.x + d, ROUND_PRECISION), round(ant.y - d, ROUND_PRECISION))
+            pos_front = (ant.x, round(ant.y - ant.speed, ROUND_PRECISION))
+            pos_right = (round(ant.x - d, ROUND_PRECISION), round(ant.y - d, ROUND_PRECISION))  
         elif ant.angle == 225:
-            pos_left = (ant.x, ant.y - ant.speed)
-            pos_front = (ant.x - (ant.speed / math.sqrt(2)), ant.y - (ant.speed / math.sqrt(2)))
-            pos_right = (ant.x - ant.speed, ant.y) 
+            pos_left = (ant.x, round(ant.y - ant.speed, ROUND_PRECISION))
+            pos_front = (round(ant.x - d, ROUND_PRECISION), round(ant.y - d, ROUND_PRECISION))
+            pos_right = (round(ant.x - ant.speed, ROUND_PRECISION), ant.y) 
         elif ant.angle == 270:
-            pos_left = (ant.x - (ant.speed / math.sqrt(2)), ant.y - (ant.speed / math.sqrt(2)))
-            pos_front = (ant.x - ant.speed, ant.y)
-            pos_right = (ant.x - (ant.speed / math.sqrt(2)), ant.y + (ant.speed / math.sqrt(2)))
+            pos_left = (round(ant.x - d, ROUND_PRECISION), round(ant.y - d, ROUND_PRECISION))
+            pos_front = (round(ant.x - ant.speed, ROUND_PRECISION), ant.y)
+            pos_right = (round(ant.x - d, ROUND_PRECISION), round(ant.y + d, ROUND_PRECISION))
         elif ant.angle == 315:
-            pos_left = (ant.x - ant.speed, ant.y)
-            pos_front = (ant.x - (ant.speed / math.sqrt(2)), ant.y + (ant.speed / math.sqrt(2)))
-            pos_right = (ant.x, ant.y + ant.speed)
+            pos_left = (round(ant.x - ant.speed, ROUND_PRECISION), ant.y)
+            pos_front = (round(ant.x - d, ROUND_PRECISION), round(ant.y + d, ROUND_PRECISION))
+            pos_right = (ant.x, round(ant.y + ant.speed, ROUND_PRECISION))
 
         if pos_left in self.pheromone_trails.keys():
             found_left = True
