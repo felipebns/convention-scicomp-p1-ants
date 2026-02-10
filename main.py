@@ -1,7 +1,7 @@
 from simulation import Simulation
 
 if __name__ == "__main__":
-    fidelity = 255
+    fidelity = 247
     pheromone_saturation = 24
     decay_rate = 1
     deposit_rate = 12
